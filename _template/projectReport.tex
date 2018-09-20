@@ -1,0 +1,153 @@
+\documentclass[letterpaper]{article}
+\usepackage{aaai}
+\usepackage{url}
+\usepackage{fullpage}
+\usepackage{graphicx,curves}
+\usepackage{amsmath}
+\usepackage{amssymb}
+%\usepackage{cmbright}
+\usepackage{latexsym}
+\usepackage{multirow}
+\usepackage[algoruled,vlined,linesnumbered]{algorithm2e}
+\usepackage{wrapfig}
+
+\usepackage[bitstream-charter]{mathdesign}
+%\renewcommand*\ttdefault{lmvtt}
+\usepackage[T1]{fontenc}
+
+\newtheorem{df}{Definition}
+\newtheorem{notation}{Notation}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{col}{Corollary}
+
+\newcommand{\bt}{\begin{theorem}\em}
+\newcommand{\et}{\end{theorem}}
+\newcommand{\Qed}{$\blacksquare$}
+\newcommand{\qed}{$\Box$}
+\newcommand{\proof}{{\bf Proof. }}
+\newcommand{\nin}{\noindent}
+\newcommand{\bea}{\begin{eqnarray}}
+\newcommand{\eea}{\end{eqnarray}}
+\newcommand{\bdf}{\begin{df}\em}
+\newcommand{\edf}{\end{df}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\newcommand{\ie}{\item}
+\newcommand{\dist}{\operatorname{dist}}
+\newcommand{\avg}{\operatorname{avg}}
+
+\newcommand{\citea}[1]{\citeauthor{#1} (\citeyear{#1})}
+
+\numberwithin{equation}{section}
+\numberwithin{theorem}{section}
+\numberwithin{lemma}{section}
+\numberwithin{df}{section}
+
+\setcounter{secnumdepth}{3} %% this gives us back SECTION NUMBERS!
+
+
+\title{The Effect and Evolvability of Observational Learning in A-Life}
+
+\author{Eugene Chen \and Satwinder Kaur \and Cody Rosevear\\
+Department of Computing Science \\ University of Alberta \\
+Edmonton, Alberta, T6G 2E8, Canada \\
+{\tt $\{$echen$\mid$skaur4$\mid$rosevear$\}$@ualberta.ca}}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+A large number of recent successes in artificial intellgience ~\cite{moravvcik2017deepstack},~\cite{mnih2013playing}, ~\cite{silver2017mastering} make use of state of the art machine learning techniques. However, these successes are restricted to problem domains where explicit goals can be articulated, and it is questionable whether such methods will be scalable with respect to more general aspects of intelligence such as ethics, creativity, and social intelligence. Evolutionary methods offer one way of potentially developing such capacities in machines as offshoots of evolutionary pressure. The evolvability of observational learning among a-life agents is arguably a key milestone towards the development of such higher level cognitive functions, as it is likely to be a precursor to such capacities as co-operation, communication, introspection, and theory of mind. The following work therefore explores the feasbility of evolving a simple type of observational learning within the context of a small a-life simulation. (INSERT RESULTS AND CONCLUSION HERE)
+\end{abstract}
+
+\section{Introduction}
+
+Many recent advances in the field of artificial intelligence (AI) are the result of significant improvements in the effectiveness and practicality of machine learning algorithms. Indeed, as the growth of data and computing power has steadily continued throughout the last half-century, many impressive feats of learning by machines that were once too computationally onerous to be considered feasible have become tractable, and the paradigms of deep and reinforcement learning have been profitably combined with more recent advances in search \cite{chaslot2008monte} to yield some stunning results across a number of problem domains, such as heads-up no-limit Texas hold em ~\cite{moravvcik2017deepstack}, Atari style video games, ~\cite{mnih2013playing}, and the ancient game of Go ~\cite{silver2017mastering}, among others.
+
+Although these achievements are impressive, they all share the same aspect in that, in each case, the objective of the agent in question is a well-defined goal for which a learning system can be explicitly designed. However, it is questionable whether the approach of designing explcit goals and/or reward functions will be scalable with respect to solving the problem of artificial general intelligence (AGI), as there are many facets of everyday intelligence, such as ethical reasoning, creativity, and social skills, that do not lend themselves well to being modeled in terms of an explicit objective function.
+
+One alternative approach to articulating such objective functions is to evolve agents within an artificial life simulation, with the intent that these other cognitive capacities will emerge as a result of a combination of individual agent learning and the right kind of evolutionary pressure. There are in fact many facets of intelligence for which this is an appealing approach, but the question of whether agents will evolve the capacity to observe the behaviour of other agent's and learn from that behaviour is particularly intriguing, as the capacity to learn from (or teach) others is arguably an ability that presages many other higher level cognitive capacites, such as co-operation, introspection, communication, and a theory of mind, which would serve as the basis for the development of social intelligence. The following work therefore seeks to probe the question of the evolvability of observational learning within the context of a number of simple artificial life environments.
+
+\section{Problem Formulation}
+
+To identify the effect of learning from others, we will need to build agents that can observe the interactions between different bodies.  Examples of such interactions  include the death of another agent by walking off a cliff, or the decrease in hunger other agents have when eating grass.  We would then need to translate the observations into some form of learning, and track the affect the learning has had on the behavior of the agent.
+
+Comparing agent survival rates with and without this observational learning (OL) comes next. If OL does not help one or more agents survive better in an environment, that would likely suggest that our methodology is incorrect, or some novel behaviour has occured.  We will also be exploring agent behaviour within and across generations to identify behaviour that is now present because of the agent's capacity for OL.
+
+Assuming we find positive effects from OL for the agents, we will study the agents' capacity to evolve that ability over multiple generations.  With OL triggered by a probabilistic value  encoded as a gene, we will compare the values of the OL gene for agents at the beginning of a simulation to the same values across different time steps.
+
+\section{Related Work}
+
+Previous work has demonstrated that model based reinforcement learning can offer significant advantages over model free methods when the model is an accurate representation of the environment ~\cite{sutton1990integrated}. The use of erroneous models, however, can be catastrophic, and there are a number of edge cases when designing the reward function that need to be taken into account. There is currently no standard approach on how to best handle these errors and edge cases, but it is an area of ongoing research ~\cite{talvitie2018learning}.
+
+The success of curriculum learning in various context~\cite{bengio2009curriculum}, ~\cite{graves2017automated} demonstrates the importance of the ordering and structure of the training data that is being used on a given agent. Specifically, such work demonstrates that, compared to a simple method of unstructured trial and error with respect to a given data set, curriculum learning is sometimes able to significantly improve learning convergence rates and generalization capacity.
+
+Curriculum learning is one way by which more effective signals can be generated for agents to learn from. An even more extreme form of knowledge transfer is machine teaching ~\cite{simard2017machine}, where one agent explicitly instructs another by structuring the order and labeling of the training data to have the most positive impact.
+
+Implicit imitation learning ~\cite{price2003accelerating} is a multi-agent approach that can be considered a kind of intermediate between traditional model based single agent RL (where no teaching is occurring), and explicit teaching by another agent.
+
+All of the work described above offer ways by which the reward signal or training data used in learning can be improved in some sense so as to help the agent in question learn more efficiently, whether via the use of single model based methods, explicit teaching, or by allowing the agent to observe other agent's in action and learning from those observations.
+
+None of this work, however, probes the question of the evolvability of such capacities within the context of an artificial life simulation, even though there has been some separate work on the evolution of learning agents more generally ~\cite{ackley1991interactions} these agents did not possess observational learning abilities and learned only with respect to their own actions.
+
+\section{Proposed Approach}
+For the first stage, the question of whether learning via observing others improves agent performance will be investigated. 
+Agent's will learn via a variation of model based Q-learning ~\cite{sutton1990integrated} that takes into account the behaviour of 
+nearby agents when updating their environmental models  -\cite{price2003accelerating}. The corresponding update rule is defined by defined by equation 1 (Forthcoming).
+
+%\begin{equation}
+%$INSERT UPDATE RULE HERE$
+%\end{equation}
+
+Agents will have the capacity to choose an 'observe' action whenever other agents are situated within a specific radius from the observing agent. 
+This radius will be treated as both fixed parameter and an evolved capacity in different experimental runs.
+The 'observe' action in this case will always be chosen whenever the chance arises in order to test the impact of such a capacity on evolutionary fitness.
+Subsequently, the capacity to observe other agent's will be made dependent on the genetics of any given agent. In particular, the agent will have a genetically determined propensity to observe other agents (if any are actually nearby). This genetic predisposition to observe will be passed down whenever two agent's mate, which occurs automatically whenever agent's are within a close enough proximity (closer than the observational threshold) and they have not mated within a parameterized time frame. If no mates are found within a pre-specified number of time steps they will reproduce asexually. 
+
+In the case of sexual reproduction, the agent's current propensity for observing the behaviour of others will be recomputed via sampling from a Gaussian distribution with a mean equal to their current probability of observing, and a fixed standard deviation. This will then be averaged with the current agent's mate to create the propensity for the offspring to observe other agents.
+For asexual reproduction the propensity will be sampled with no averaging. The propensity will be probabilistic, and thus limited to the range between 0 and 1.
+
+Based on the effect that OL has in mammals, particularly in humans, we hypothesize that OL-enabled agents will be better at surviving than agents without that capacity. Moreover, we suspect that these 'smarter' agents will be quicker to evolve novel behaviour relating to group dynamics, such as learning to imitate others in terms of their behaviour or explicitly developing a 'follow the leader' mentality.
+
+\section{Theoretical Analysis}
+(Forthcoming: as the current learning algorithm is subject to change)
+
+\section{Empirical Evaluation}
+
+To test for the occurrence of OL for agents, we compare the behaviour between agents with and without OL after being in a position to witness interactions from other agents.  These interactions include agents walking off cliffs and dying, prey agents losing health after interacting with predator agents, and prey agents consuming grass.  
+
+In all three scenarios, we would run five hundred simulations for both OL and non-OL agents that cannot reproduce and compare the average age of agents before extinction and/or the difference in surivial rates up to a certain number time steps.  This way we can confirm that OL has had an effect independent of evolution.  We will also want to look at behaviour immediately after the interactions occur: ideally OL agents that watch other agents die from cliffs or get injured by predators would more quickly avoid both, and will be faster at moving towards grass for eating after watching another prey agent do so and gain energy from it.
+
+We will then run a thousand simulations where reproduction occurs, five hundred of which will include prey agents that always practice OL, and five hundred simulation where agents are without that capacity. Similar to  \cite{ackley1991interactions}, we will compare the percentage of populations that survive a set number of time steps, a number we can determine later.
+
+Finally, we will run another five hundred simulations where prey agents have varied capacities in OL, and compare them against the previous simulations.  We believe that a higher percentage of these simulations will have surviving prey agents compared to their non-OL peers, and we can track the average capacity in OL agents have in these simualtions over time.
+
+\section{Discussion}
+(Forthcoming)
+
+\section{Future Work}
+
+One avenue for future work would be to extend the question of whether agents can be induced to evolve the capacity to explciitly teach one another, rather than simply engaging in imitative behaviour. This is a natural progression of the current question in terms of the complexity of behaviour, and future experiments could focus on exploring the difference in necessary and sufficient conditions for the emergence imitative versus teaching behaviour.
+
+Additionally, the action of teaching can be defined in such a way so as to carry some type of cost, such as in terms of time wasted better spent gathering resources. This adds a non-trivial game-theoretic component to the question of wheter to teach or not to teach, as it is conceivalbe that there would be some situations where teachig others certain skills would facilitate co-operative strategies that are better than purely greedy ones long term.
+
+Finally, with respect to both imitation and teaching, one could explore how kinship relations would alter the scenarios and potential outcomes. If there is a genetic relationship between two agents, it is, in some sense, within the potential teacher's interest to secure suitable skills for their kin to survive, at least from the gene's point of view ~\cite{dawkins2006selfish}. Exploring to what extent genetic markers of kinship alter the evovlvability of both the willingness to imitate or teach others is another natural next step.
+
+\section{Conclusions}
+Machine learning has proven to be a key driver of many recent advances in AI. A large number of these successes, however, are restricted to problem domains where explicit goals can be articulated. It is questionable whether such methods will be scalable with respect to more general aspects of intelligence, such that it is worthwhile to explore the possibility of using evolutionary methods in order to induce the development of these more generic cognitive capacities.
+
+One such capacity is that of being able to learn from others via observation, which is a good candidate for starting an investigation as to how other more complex cognitive capacities and behaviours might be evolved due to its plausible relation to other aspects of intelligence, such as communication, introspection, and social intelligence. Previous work has so far kept much of these questions separate, focusing on either an agent's within life learning in various forms \cite{bengio2009curriculum}, ~\cite{graves2017automated}~\cite{simard2017machine}, or evolving agents whose learning capacities are fairly limited ~\cite{ackley1991interactions}.
+
+(SUMMARIZE PAPER CONTRIBUTION AND RESULTS HERE)
+
+\section*{Acknowledgments}
+
+The authors would like to thank Vadim Bulitko for helpful commentary and constructive criticism concerning the present work.
+
+\bibliography{projectReport}
+\bibliographystyle{aaai}
+
+\end{document}
