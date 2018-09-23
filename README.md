@@ -1,2 +1,2 @@
-# CMPUT659Project
+# CMPUT651Project
 Artificial Life Project
